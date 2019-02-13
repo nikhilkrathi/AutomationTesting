@@ -4,7 +4,7 @@ var beautify = require('js-beautify').js;
 var app = express();
 var templateEngine = require('./templateEngine.js');
 var connection = require('./db.js');
-var result = templateEngine.beforeString();
+var result = templateEngine.getPreCode();
 
 connection.connect(function(error){
 	if(!!error){
@@ -21,9 +21,9 @@ app.get('/', function(req, res){
 		} else {
 			res.send("Hi " + rows[0].targetval);
 			for (var i = 0; i < rows.length; i++){
-				result = result + templateEngine.templateString(rows[i]) + '\n';				
+				result = result + templateEngine.getTemplateCode(rows[i]);				
 			}
-			result = result + templateEngine.afterString();
+			result = result + templateEngine.getPostCode();
 			result = beautify(result, { indent_size: 2, space_in_empty_paren: true });
 			fs.writeFile('Output.java', result, (err) => {
 				if (err) throw err;
