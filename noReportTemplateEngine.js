@@ -1,6 +1,6 @@
 module.exports = {
 	getImportStatements: function () {
-		return 'package reportGen;\n'+
+		return 'package reportGen;\n\n'+
 				'import org.openqa.selenium.By;\n'+
 				'import org.openqa.selenium.WebDriver;\n'+
 				'import org.openqa.selenium.firefox.FirefoxDriver;\n'+
@@ -16,7 +16,7 @@ module.exports = {
 				'WebDriver driver;\n\n'+
 				'@BeforeTest\n'+
 	 			'public void startReport(){\n'+
-				'System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");\n'+
+				'System.setProperty("webdriver.gecko.driver", "C:\\\\geckodriver\\\\geckodriver.exe");\n'+
 	 			'}\n\n'+
 	 			'@BeforeMethod\n'+
 	 			'public void initiateDriver() {\n'+
@@ -38,6 +38,11 @@ module.exports = {
 		}
 		else if(row.command == "click") {
 			return 'driver.findElement(By.' + row.target + '("' + row.targetval + '")).click();\n';
+		}
+		else if(row.command == "assertText"){
+			if(row.target == "url"){
+				return 'Assert.assertEquals(driver.getCurrentUrl(), "' + row.value + '");\n';	
+			}
 		}
 	},
 

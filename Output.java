@@ -1,4 +1,5 @@
 package reportGen;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +14,7 @@ public class NoReportClass {
 
   @BeforeTest
   public void startReport() {
-    System.setProperty("webdriver.gecko.driver", "C:\geckodriver\geckodriver.exe");
+    System.setProperty("webdriver.gecko.driver", "C:\\geckodriver\\geckodriver.exe");
   }
 
   @BeforeMethod
@@ -27,6 +28,7 @@ public class NoReportClass {
     driver.findElement(By.name("email")).sendKeys("nikhilkrathi@gmail.com");
     driver.findElement(By.name("password")).sendKeys("123456");
     driver.findElement(By.name("login")).click();
+    Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/twitter/home.php");
   }
 
   @Test
@@ -35,6 +37,7 @@ public class NoReportClass {
     driver.findElement(By.name("email")).sendKeys("nikhilkrathi@gmail.com");
     driver.findElement(By.name("password")).sendKeys("123456");
     driver.findElement(By.name("login")).click();
+    Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/twitter/home.php");
   }
 
   @AfterMethod
